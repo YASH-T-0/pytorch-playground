@@ -7,7 +7,8 @@ Inspired by classic playgrounds, our goal is to make an educational, fun, and mo
 
 ## Project Preview
 
-<img width="1820" height="794" alt="Untitled" src="https://github.com/user-attachments/assets/c48b5e16-9b14-4c10-b9e1-c94d54a9eca9" />
+
+<img width="1920" height="895" alt="typeone" src="https://github.com/user-attachments/assets/5686ed7d-39b3-4f99-836c-35dce5dd14d6" />
 
 
 _We are actively improving the UI!_
