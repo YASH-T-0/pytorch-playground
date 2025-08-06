@@ -25,6 +25,7 @@ class ANN(nn.Module):
     def forward(self, x):
         return self.net(x)
 
+
 class CNN(nn.Module):
     def __init__(self, input_channels=1, num_classes=2):
         super().__init__()
