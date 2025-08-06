@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Neural Network Playground</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>
+      <span class="highlight">Neural Network Playground</span><br>
+      <small>Experiment, Learn, and Visualize Neural Networks</small>
+    </h1>
+    <button id="toggle-theme" title="Toggle Dark/Light Mode">🌙</button>
+  </header>
+  <section class="controls">
+    <div class="controls-row">
+      <button title="Reset Network">&#8635;</button>
+      <button class="play" title="Play">&#9658;</button>
+      <span>Epoch</span>
+      <span class="epoch">000,000</span>
+      <label>
+        Learning rate
+        <input type="number" value="0.001" step="0.0001" min="0.0001">
+      </label>
+      <label>
+        Activation
+        <select>
+          <option>ReLU</option>
+          <option>Sigmoid</option>
+          <option>Tanh</option>
+          <option>Softmax</option>
+        </select>
+      </label>
+      <label>
+        Regularization
+        <select>
+          <option>None</option>
+          <option>L1</option>
+          <option>L2</option>
+        </select>
+      </label>
+      <label>
+        Reg. rate
+        <input type="number" value="0.001" step="0.001" min="0">
+      </label>
+      <label>
+        Problem type
+        <select>
+          <option>Classification</option>
+          <option>Regression</option>
+        </select>
+      </label>
+      <label>
+        Batch size
+        <input type="number" value="10" step="1" min="1" max="100">
+      </label>
+    </div>
+  </section>
+  <main>
+    <div class="panel data">
+      <h2>DATA</h2>
+      <p>Choose or upload a dataset <span class="tooltip" title="Upload your own CSV file or draw data.">?</span></p>
+      <div class="dataset-icons">
+        <button title="Blobs">🟦</button>
+        <button title="Spiral">🌀</button>
+        <button title="XOR">⚡</button>
+        <button title="Custom">🧩</button>
+        <input type="file" id="upload-data" accept=".csv" title="Upload CSV">
+      </div>
+      <label>
+        Training/Test Split: <span id="train-test-val">50%</span>
+        <input type="range" min="0" max="100" value="50" oninput="document.getElementById('train-test-val').textContent=this.value+'%'">
+      </label>
+      <label>
+        Noise: <span id="noise-val">0</span>
+        <input type="range" min="0" max="100" value="0" oninput="document.getElementById('noise-val').textContent=this.value">
+      </label>
+      <button>Regenerate</button>
+      <button id="draw-data-btn" title="Draw your own data">✎ Draw Data</button>
+    </div>
+    <div class="panel features">
+      <h2>FEATURES <span class="tooltip" title="Select input features for the model">?</span></h2>
+      <ul>
+        <li><input type="checkbox" checked> X₁</li>
+        <li><input type="checkbox" checked> X₂</li>
+        <li><input type="checkbox"> X₁²</li>
+        <li><input type="checkbox"> X₂²</li>
+        <li><input type="checkbox"> X₁·X₂</li>
+        <li><input type="checkbox"> sin(X₁)</li>
+        <li><input type="checkbox"> sin(X₂)</li>
+      </ul>
+    </div>
+    <div class="panel network">
+      <h2>MODEL ARCHITECTURE <span class="tooltip" title="Add or remove layers, change neurons">?</span></h2>
+      <div class="network-controls">
+        <button id="add-layer">+</button>
+        <button id="remove-layer">-</button>
+        <span id="layer-count">3 Layers</span>
+      </div>
+      <div id="layer-configs"></div>
+      <div class="network-visual">
+        <svg id="network-svg" width="400" height="120"></svg>
+      </div>
+      <button id="save-model" title="Export model settings">Export Model</button>
+      <button id="load-model" title="Import model settings">Import Model</button>
+    </div>
+    <div class="panel output">
+      <h2>OUTPUT</h2>
+      <div>
+        <p>Test loss <span id="test-loss">0.504</span></p>
+        <p>Training loss <span id="train-loss">0.508</span></p>
+      </div>
+      <div class="output-visual">
+        <canvas id="output-canvas" width="200" height="150"></canvas>
+        <div>
+          <label><input type="checkbox"> Show test data</label>
+          <label><input type="checkbox"> Discretize output</label>
+        </div>
+      </div>
+      <div class="output-stats">
+        <canvas id="loss-chart" width="180" height="60"></canvas>
+        <div id="accuracy-bar" title="Model accuracy"></div>
+      </div>
+      <small>Colors show data, neuron and weight values. <span class="tooltip" title="Hover over points for info">?</span></small>
+    </div>
+    <div class="panel history">
+      <h2>RUN HISTORY <span class="tooltip" title="See previous experiment results">?</span></h2>
+      <ul id="run-history"></ul>
+    </div>
+  </main>
+  <footer>
+    <div class="accessibility">
+      <label>Font Size <input type="range" min="14" max="22" value="16" id="font-size-slider"></label>
+      <span id="font-size-value">16px</span>
+    </div>
+    <button id="help-btn" title="Show guided walkthrough">❔ Help</button>
+  </footer>
+  <div id="tooltip-popup" style="display:none;"></div>
+  <script src="script.js"></script>
+</body>
+</html>
